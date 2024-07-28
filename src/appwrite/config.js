@@ -4,9 +4,17 @@ import { Client, Databases } from "appwrite";
                 .setEndpoint(import.meta.env.VITE_ENDPOINT)
                 .setProject(import.meta.env.VITE_PROJECT_ID)
 
+    const collections = [
+        {
+            name: "notes",
+            id: import.meta.env.VITE_COLLECTION_NOTES_ID,
+            dbId: import.meta.env.VITE_DATABASE_ID
+        },
+    ]                        
 
-  const  database = new Databases(client)
-  export {database , client}
+
+  const  databases = new Databases(client)
+  export {databases , client , collections}
 
   
 

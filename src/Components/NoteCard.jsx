@@ -3,17 +3,9 @@ import Trash from '../icons/Trash';
 import { setNewOffSet, autoGrow, setZIndex, bodyParser } from '../utilis';
 
 const NoteCard = ({ note }) => {
-  console.log('Note:', note);
-
   const body = bodyParser(note.body);
-  console.log('Parsed body:', body);
-
-  // Handle both "position" and "positon" fields
   const rawPosition = note.position || note.positon;
-  console.log('Note position (raw):', rawPosition);
-  console.log('Note colors (raw):', note.colors);
-
-  // Safe JSON parsing function
+  
   const safeJSONParse = (jsonString, fallback) => {
     try {
       return JSON.parse(jsonString);
@@ -23,13 +15,9 @@ const NoteCard = ({ note }) => {
     }
   };
 
-  // Parse position and colors safely
+  
   const initialPosition = safeJSONParse(rawPosition, { x: 0, y: 0 });
   const colors = safeJSONParse(note.colors, { colorBody: '#fff', colorHeader: '#ccc', colorText: '#000' });
-
-  // Log parsed values
-  console.log('Parsed Position:', initialPosition);
-  console.log('Parsed Colors:', colors);
 
   const [position, setPosition] = useState(initialPosition);
   const mouseStartPos = useRef({ x: 0, y: 0 });
@@ -38,7 +26,6 @@ const NoteCard = ({ note }) => {
 
   useEffect(() => {
     if (textAreaRef.current) {
-      console.log('Textarea element:', textAreaRef.current);
       autoGrow(textAreaRef.current);
     } else {
       console.warn('Textarea element is not available');
