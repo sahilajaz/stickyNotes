@@ -7,20 +7,20 @@ export const setNewOffSet = (card, mouseMoveDir = { x: 0, y: 0 }) => {
         y: offSetTop < 0 ? 0 : offSetTop
     }
 }
- 
+
 export const autoGrow = (element) => {
     if (!element) {
-      console.error('No element provided to autoGrow');
-      return;
+        console.error('No element provided to autoGrow');
+        return;
     }
     element.style.height = 'auto';
     element.style.height = `${element.scrollHeight}px`;
-  };
+};
   
 
 export const setZIndex = (selectedCard) => {
     selectedCard.style.zIndex = 999;
- 
+    
     Array.from(document.getElementsByClassName("card")).forEach((card) => {
         if (card !== selectedCard) {
             card.style.zIndex = selectedCard.style.zIndex - 1;
@@ -33,6 +33,9 @@ export const bodyParser = (value) => {
         return JSON.parse(value)
     }
     catch(error){
-       return value
+        return value
     }
 }
+
+
+
