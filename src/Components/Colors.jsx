@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { NoteContext } from "../Context/NoteContext";
+import { db } from "../appwrite/databases";
 
 const Colors = ({ color }) => {
   const { selectedNote, setSelectedNote, notes, setNotes } = useContext(NoteContext);
@@ -31,6 +32,7 @@ const Colors = ({ color }) => {
 
       // Update the notes in the context
       setNotes(newNotes);
+      db.notes.update(selectedNote.$id , {colors: JSON.stringify(color)})
 
     } catch (error) {
       console.error("Error changing color:", error);

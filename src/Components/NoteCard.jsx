@@ -126,8 +126,10 @@ const handleKeyUp = () => {
           style={{ color: colors.colorText }}
           defaultValue={body}
           onInput={() => autoGrow(textAreaRef.current)}
-          onClick={() => setZIndex(cardRef.current)}
-          onFocus={()=> {setSelectedNote(note)}}
+          onClick={() => (
+            setZIndex(cardRef.current),
+            setSelectedNote(note)
+          )}
         />
       </div>
     </div>
