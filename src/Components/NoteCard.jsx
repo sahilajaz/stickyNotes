@@ -6,12 +6,14 @@ import Spinner from '../icons/Spinner';
 import { useContext } from 'react';
 import { NoteContext } from '../Context/NoteContext';
 
+
 const NoteCard = ({ note}) => {
   const{setNote} = useContext(NoteContext)
   const[saving , setSaving] = useState(false)
   const keyUpTimer = useRef(null)
   const body = bodyParser(note.body);
   const rawPosition = note.position || note.positon;
+  const {setSelectedNote} = useContext(NoteContext)
   
   const safeJSONParse = (jsonString, fallback) => {
     try {
@@ -33,6 +35,7 @@ const NoteCard = ({ note}) => {
   useEffect(() => {
     if (textAreaRef.current) {
       autoGrow(textAreaRef.current);
+      setZIndex(cardRef.current)
     } else {
       console.warn('Textarea element is not available');
     }
@@ -46,6 +49,7 @@ const NoteCard = ({ note}) => {
     document.addEventListener('mousemove', mouseMove);
     document.addEventListener('mouseup', mouseUp);
     setZIndex(cardRef.current);
+    setSelectedNote(note)
     }
   }, []);
 
@@ -123,6 +127,7 @@ const handleKeyUp = () => {
           defaultValue={body}
           onInput={() => autoGrow(textAreaRef.current)}
           onClick={() => setZIndex(cardRef.current)}
+          onFocus={()=> {setSelectedNote(note)}}
         />
       </div>
     </div>
