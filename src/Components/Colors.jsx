@@ -6,7 +6,7 @@ const Colors = ({ color }) => {
 
   const changeColor = () => {
     if (!selectedNote) {
-      alert("You must select a note before changing color.");
+      alert("You must select a note before changing color and drag it a big.");
       return;
     }
 
