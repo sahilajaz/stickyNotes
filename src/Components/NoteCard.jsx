@@ -3,8 +3,11 @@ import DeleteButton from './DeleteButton';
 import { setNewOffSet, autoGrow, setZIndex, bodyParser} from '../utilis';
 import { db } from '../appwrite/databases';
 import Spinner from '../icons/Spinner';
+import { useContext } from 'react';
+import { NoteContext } from '../Context/NoteContext';
 
-const NoteCard = ({ note , setNOtes }) => {
+const NoteCard = ({ note}) => {
+  const{setNote} = useContext(NoteContext)
   const[saving , setSaving] = useState(false)
   const keyUpTimer = useRef(null)
   const body = bodyParser(note.body);
@@ -103,7 +106,7 @@ const handleKeyUp = () => {
         className="card-header"
         style={{ backgroundColor: colors.colorHeader }}
       >
-        <DeleteButton setNOtes={setNOtes} noteId={note.$id}/>
+        <DeleteButton  noteId={note.$id}/>
         {
         saving && (
         <div className="card-saving">
